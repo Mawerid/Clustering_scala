@@ -1,0 +1,5 @@
+package algorithm
+
+object KNeighbours {
+
+}

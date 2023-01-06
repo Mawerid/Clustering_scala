@@ -3,13 +3,20 @@ package io
 import com.github.tototoshi.csv._
 import java.io.File
 
+object Input {
 
-object Input extends App {
+  def readFullReadersCSV(path: String): List[Map[String, Double]] = {
+    val reader = CSVReader.open(new File(path))
+    reader.allWithHeaders().map(_.map(it => it._1 -> it._2.toDouble))
+  }
 
-  val path = "data/input/input_data.csv"
+  def readFullCSV(path: String): List[List[Double]] = {
+    val reader = CSVReader.open(new File(path))
+    reader.all().map(_.map(_.toDouble))
+  }
 
-  val reader = CSVReader.open(new File(path))
-
-  println(reader.all())
-
+  def iteratorLineCSV(path: String): Iterator[Seq[Double]] = {
+    val reader = CSVReader.open(new File(path))
+    reader.iterator.map(_.map(_.toDouble))
+  }
 }

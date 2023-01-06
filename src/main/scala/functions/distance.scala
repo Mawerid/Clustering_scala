@@ -5,6 +5,9 @@ import scala.annotation.tailrec
 
 object distance extends App{
 
+  // Даниил, нам надоЮ чтобы это была библиотека, чтобы я вызвал функцию и все заработало
+  // А еще давай реализуем расчет расстояний несколькими способами (ссылка в телеге)
+
   val threadNum = 2 // number of threads
   val p1: Array[Double] = Array(1, 1, 1, 1, 1) // example point
   val p2: Array[Double] = Array(4, 5, 3, 3, 5) // example point
