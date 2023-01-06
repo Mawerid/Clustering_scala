@@ -1,3 +1,5 @@
-[debug] not up to date. inChanged = true, force = false
-[debug] Updating ProjectRef(uri("file:/C:/Users/danii/IdeaProjects/Clustering_scala/project/"), "clustering_scala-build")...
-[debug] Done updating ProjectRef(uri("file:/C:/Users/danii/IdeaProjects/Clustering_scala/project/"), "clustering_scala-build")
+[0m[[0m[0mdebug[0m] [0m[0mnot up to date. inChanged = true, force = false[0m
+[0m[[0m[0mdebug[0m] [0m[0mUpdating ProjectRef(uri("file:/home/mawerid/parallel-prog/course_work/project/"), "course_work-build")...[0m
+[0m[[0m[33mwarn[0m] [0m[0mUnrecognized repository Scala Plugin Bundled Repository, ignoring it[0m
+[0m[[0m[33mwarn[0m] [0m[0mUnrecognized repository Scala Plugin Bundled Repository, ignoring it[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone updating ProjectRef(uri("file:/home/mawerid/parallel-prog/course_work/project/"), "course_work-build")[0m
