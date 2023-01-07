@@ -8,8 +8,9 @@ object Output {
 
   /**
    * Save centers of founded cluster (or just data)
+   *
    * @param centers list of point
-   * @param path path to file
+   * @param path    path to file
    * @return file created or not
    */
   def saveClusterCenters(centers: List[List[Double]], path: String): Boolean = {
@@ -22,8 +23,9 @@ object Output {
 
   /**
    * Save plot to png
+   *
    * @param scatter plot (as ByteArray)
-   * @param path path to file
+   * @param path    path to file
    * @return file created or not
    */
   def saveScatterPlot(scatter: Array[Byte], path: String): Boolean = {

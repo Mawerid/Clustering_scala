@@ -7,10 +7,11 @@ object Visualisation {
 
   /**
    * generate plot from 2 dimension data
-   * @param data data
+   *
+   * @param data   data
    * @param xLabel label of x axes
    * @param yLabel label of y axes
-   * @param title main title of plot
+   * @param title  main title of plot
    * @param legend legend of plot
    * @return png plot as ByteArray
    */

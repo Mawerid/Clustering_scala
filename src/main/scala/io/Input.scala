@@ -7,6 +7,7 @@ object Input {
 
   /**
    * Read CSV file with headers
+   *
    * @param path path to file
    * @return List of Map(header -> value)
    */
@@ -17,6 +18,7 @@ object Input {
 
   /**
    * Read CSV file without headers
+   *
    * @param path path to file
    * @return List of points
    */
@@ -27,6 +29,7 @@ object Input {
 
   /**
    * Read CSV file without headers
+   *
    * @param path path to file
    * @return Iterator in each data point
    */

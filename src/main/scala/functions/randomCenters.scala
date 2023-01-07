@@ -6,7 +6,8 @@ object randomCenters {
 
   /**
    * Generate first centers of clusters
-   * @param data data for clustering
+   *
+   * @param data       data for clustering
    * @param clusterNum number of clusters
    * @return List with points - random centers of clusters
    */

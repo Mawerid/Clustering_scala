@@ -24,7 +24,7 @@ object clustering {
       , "X"
       , "Y"
       , "Clustering data (2 clusters, 2 dimensions)"
-      ,"Some data")
+      , "Some data")
     val filename = "data/output/pic.png"
     saveScatterPlot(scatter, filename)
   }
