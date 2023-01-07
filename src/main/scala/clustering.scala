@@ -1,4 +1,5 @@
 import io.Input._
+import algorithm.KMeans._
 import io.Visualisation._
 import io.Output._
 
@@ -15,9 +16,10 @@ object clustering {
     val path = "data/input/clusters_2_dim_2.csv"
     val data = readFullCSV(path)
 
-    val lst1 = List(2d, 3d, 4d)
-    val lst2 = List(2d, 3d, 4d)
-    val dist = lst1.zip(lst2).map(it => Math.pow(it._1 - it._2, 2)).sum
+    val clusters = KMeans(data, 2)
+
+    println(clusters.size)
+//    clusters.foreach(it => println(it.size))
 
     //Визуализация данных
     val scatter = drawScatterToByteArray(data
