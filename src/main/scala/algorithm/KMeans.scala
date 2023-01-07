@@ -1,30 +1,12 @@
 package algorithm
 
 import functions.Distance._
-import functions.randomCenters._
+import functions.RandomCenters._
+import functions.UpdateCenters._
 import java.util.concurrent.{ExecutorService, Executors}
 import scala.annotation.tailrec
 
 object KMeans {
-
-  /**
-   * Find mean value of dimension in cluster
-   *
-   * @param cluster cluster data
-   * @param dimension dimension to find mean
-   * @return mean value
-   */
-  def meanCoor(cluster: List[List[Double]], dimension: Int): Double =
-    cluster.map(point => point(dimension)).sum / cluster.size
-
-  /**
-   * Find new center of cluster
-   *
-   * @param cluster cluster of points
-   * @return new center(mean)
-   */
-  def updateCenter(cluster: List[List[Double]]): List[Double] =
-    cluster.head.indices.map(i => meanCoor(cluster, i)).toList
 
   /**
    * Filling each cluster
@@ -70,7 +52,7 @@ object KMeans {
    * @param threadsNum number of using threads
    * @return filled list with each cluster
    */
-  def KMeans(data: List[List[Double]]
+  def kMeans(data: List[List[Double]]
              , clustersNum: Int
              , eps: Double = 0.00001
              , pool: ExecutorService
@@ -85,7 +67,7 @@ object KMeans {
     val n = data.length / threadsNum
 
     def runnable(centersCurr: List[List[Double]], startIndex: Int, endIndex: Int) = new Runnable {
-      override def run(): Unit = {
+      override def run(): Unit = this.synchronized {
         val partClusters = fillClusters(data.slice(startIndex, endIndex), centersCurr)
         clustersVar.indices.foreach(clustNum => clustersVar =
           clustersVar
@@ -105,12 +87,12 @@ object KMeans {
         (0 until threadsNum).foreach(id => {
           pool.execute(runnable(centersCurr, id * n, (id + 1) * n))
         })
-        runnable(centersCurr, threadsNum * n, r + threadsNum * n)
+        runnable(centersCurr, threadsNum * n, r + threadsNum * n).run()
 
         Thread.sleep(100)
 
-        //val clusters = clusterVar //fillClusters(data, centersCurr)
-        val centersNew = clustersVar.map(updateCenter)
+        val clusters = clustersVar //fillClusters(data, centersCurr)
+        val centersNew = clusters.map(updateCenter)
 
         loop(centersNew
           , centersCurr.zip(centersNew)

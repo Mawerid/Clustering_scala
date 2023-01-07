@@ -26,7 +26,7 @@ object clustering {
     // Запуск расчетов
     val pool = Executors.newFixedThreadPool(countThread)
 
-    val clusters = KMeans(data, clusterNum, 0.00001, pool, countThread)
+    val clusters = kMeans(data, clusterNum, 0.00001, pool, countThread)
 
     println(clusters.size)
     clusters.foreach(it => println(it.size))

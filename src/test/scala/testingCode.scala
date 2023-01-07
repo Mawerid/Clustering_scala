@@ -1,5 +1,5 @@
 import functions.Distance._
-import functions.randomCenters._
+import functions.RandomCenters._
 
 import scala.util.Random
 import java.util.concurrent.Executors.newFixedThreadPool

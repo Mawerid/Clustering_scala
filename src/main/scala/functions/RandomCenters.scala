@@ -2,7 +2,7 @@ package functions
 
 import scala.util.Random
 
-object randomCenters {
+object RandomCenters {
 
   /**
    * Generate first centers of clusters
