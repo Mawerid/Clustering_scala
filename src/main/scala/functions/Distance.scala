@@ -1,6 +1,6 @@
 package functions
 
-object distance {
+object Distance {
 
   /**
    * square of euclidean distance
