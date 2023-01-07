@@ -9,16 +9,14 @@ object clustering {
   def main(args: Array[String]): Unit = {
 
     //Кол-во доступных ядер для распараллеливания
-    val countProcessor = 4//java.lang.Runtime.getRuntime.availableProcessors - 1
-
-    println(countProcessor)
+    val countThread = 4 //java.lang.Runtime.getRuntime.availableProcessors - 1
 
     //Чтение данных
     val path = "data/input/clusters_2_dim_2.csv"
     val data = readFullCSV(path)
-    val pool = Executors.newFixedThreadPool(countProcessor)
+    val pool = Executors.newFixedThreadPool(countThread)
 
-    val clusters = KMeans(data, 2, 0.00001, pool, countProcessor)
+    val clusters = KMeans(data, 2, 0.00001, pool, countThread)
 
     println(clusters.size)
     clusters.foreach(it => println(it.size))

@@ -107,10 +107,10 @@ object KMeans {
         })
         runnable(centersCurr, threadsNum * n, r + threadsNum * n)
 
-        Thread.sleep(40)
+        Thread.sleep(100)
 
-        val clusters = clustersVar //fillClusters(data, centersCurr)
-        val centersNew = clusters.map(updateCenter)
+        //val clusters = clusterVar //fillClusters(data, centersCurr)
+        val centersNew = clustersVar.map(updateCenter)
 
         loop(centersNew
           , centersCurr.zip(centersNew)
