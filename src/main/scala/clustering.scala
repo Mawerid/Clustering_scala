@@ -1,5 +1,8 @@
 import io.Input._
 import algorithm.KMeans._
+import io.Visualisation._
+import io.Output._
+import java.util.concurrent.{ExecutorService, Executors}
 import smile.data.DataFrame
 import smile.read
 //import com.cibo.evilplot.plot.renderers.PointRenderer
@@ -26,20 +29,29 @@ object clustering {
   def main(args: Array[String]): Unit = {
 
     //Кол-во доступных ядер для распараллеливания
-    val countProcessor = java.lang.Runtime.getRuntime.availableProcessors - 1
-
-    println(countProcessor)
+    val countThread = 4 //java.lang.Runtime.getRuntime.availableProcessors - 1
 
     //Чтение данных
     val path = "data/input/clusters_2_dim_2.csv"
     val data = readFullCSV(path)
+    val pool = Executors.newFixedThreadPool(countThread)
 
+    val clusters = KMeans(data, 2, 0.00001, pool, countThread)
     val clusterNum = 2
-    val clusters = KMeans(data, clusterNum)
 
     println(clusters.size)
     clusters.foreach(it => println(it.size))
 
+    pool.shutdown()
+
+    //Визуализация данных
+//    val scatter = drawScatterToByteArray(data
+//      , "X"
+//      , "Y"
+//      , "Clustering data (2 clusters, 2 dimensions)"
+//      , "Some data")
+//    val filename = "data/output/pic.png"
+//    saveScatterPlot(scatter, filename)
     val names: Seq[String] = (0 until clusterNum).map(i => s"Coordinate $i")
     val transData = data.map(_.toArray).toArray
     val df = DataFrame.of(transData, names: _*)
