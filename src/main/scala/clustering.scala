@@ -3,6 +3,9 @@ import algorithm.KMeans._
 import io.Visualisation._
 import io.Output._
 
+import algorithm.KMeans._
+import algorithm.SequentialJoins._
+
 import java.util.concurrent.{ExecutorService, Executors}
 import smile.data.DataFrame
 
@@ -16,7 +19,7 @@ object clustering {
   def main(args: Array[String]): Unit = {
 
     // Кол-во доступных ядер для распараллеливания
-    val countThread = 4 //java.lang.Runtime.getRuntime.availableProcessors - 1
+    val countThread = 8 //java.lang.Runtime.getRuntime.availableProcessors - 1
 
     // Чтение данных
     val path = "data/input/clusters_3_dim_3.csv"
@@ -26,7 +29,8 @@ object clustering {
     // Запуск расчетов
     val pool = Executors.newFixedThreadPool(countThread)
 
-    val clusters = kMeans(data, clusterNum, 0.00001, pool, countThread)
+    //val clusters = kMeans(data, clusterNum, 0.00001, pool, countThread)
+    val clusters = sequentialJoins(data, clusterNum, pool)
 
     pool.shutdown()
 
