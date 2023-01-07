@@ -8,29 +8,59 @@ object distance extends App{
   // Даниил, нам надоЮ чтобы это была библиотека, чтобы я вызвал функцию и все заработало
   // А еще давай реализуем расчет расстояний несколькими способами (ссылка в телеге)
 
-  val threadNum = 2 // number of threads
-  val p1: Array[Double] = Array(1, 1, 1, 1, 1) // example point
-  val p2: Array[Double] = Array(4, 5, 3, 3, 5) // example point
+  /**
+   * square of euclidean distance
+   *
+   * @param p1 first point
+   * @param p2 second point
+   * @return distance between them
+   */
+  def euclideanSqr(p1: List[Double], p2: List[Double]): Double =
+    p1.zip(p2).map(it => Math.pow(it._1 - it._2, 2)).sum
 
-  // calculate sum of Square of difference between two points
-  def diff_sum: (Array[Double], Array[Double], Int) => Double = (p1, p2, idThread) => {
-    val len = p1.length // const - len
-    @tailrec
-    def loop(acc: Double = 0, i: Int = idThread): Double = { // main tailrec
-      if (i >= len) acc
-      else loop(acc + Math.pow(p1(i) - p2(i), 2), i + threadNum)
-    }
-    loop()
-  }
+  /**
+   * euclidean distance
+   *
+   * @param p1 first point
+   * @param p2 second point
+   * @return distance between them
+   */
+  def euclidean(p1: List[Double], p2: List[Double]): Double =
+    Math.pow(euclideanSqr(p1, p2), 0.5)
 
-  var res: Double = 0 // var for res
+  /**
+   * manhattan distance
+   *
+   * @param p1 first point
+   * @param p2 second point
+   * @return distance between them
+   */
+  def manhattan(p1: List[Double], p2: List[Double]): Double =
+    p1.zip(p2).map(it => Math.abs(it._1 - it._2)).sum
 
-  (0 until threadNum).foreach(id => new Thread(() => this.synchronized { // work of many threads
-    res += diff_sum(p1, p2, id)
-  }).start())
+  /**
+   * chebyshev distance
+   *
+   * @param p1 first point
+   * @param p2 second point
+   * @return distance between them
+   */
+  def chebyshev(p1: List[Double], p2: List[Double]): Double =
+    p1.zip(p2).map(it => Math.abs(it._1 - it._2)).max
 
-  Thread.sleep(100) // for synchronize
-  val distance = Math.pow(res, 0.5) // result sqrt
-  println(distance)
+
+  /**
+   * powering distance
+   *
+   * @param p1 first point
+   * @param p2 second point
+   * @param r degree of radical
+   * @param p degree of powering
+   * @return distance between them
+   */
+  def powering(p1: List[Double], p2: List[Double], r: Double, p: Double): Double =
+    Math.pow(
+      p1.zip(p2).map(it => Math.pow(it._1 - it._2, p)).sum,
+      r)
 
 }
