@@ -1,7 +1,7 @@
 *.class
 *.log
 *.xls
-*.idea
-*.bsp
+.idea
+.bsp
 *.png
 target
