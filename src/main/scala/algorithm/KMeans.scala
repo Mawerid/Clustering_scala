@@ -3,7 +3,7 @@ package algorithm
 import functions.Distance._
 import functions.RandomCenters._
 import functions.UpdateCenters._
-import java.util.concurrent.{ExecutorService, Executors}
+import java.util.concurrent.ExecutorService
 import scala.annotation.tailrec
 
 object KMeans {
