@@ -6,7 +6,17 @@ import functions.randomCenters._
 import java.util.concurrent.{ExecutorService, Executors}
 import scala.annotation.tailrec
 
+import scala.annotation.tailrec
+import java.net.{Socket, ServerSocket}
+import java.util.concurrent.{Executors, ExecutorService}
+import java.util.Date
+
+
 object KMeans {
+//  def newCenter(cluster: List[List[Double]], idThread: Int): List[Double] = {
+//    @tailrec
+//    def loop()
+//  }
 
   def meanCoor(cluster: List[List[Double]], dimention: Int): Double =
     cluster.map(point => point(dimention)).sum / cluster.size
@@ -17,9 +27,9 @@ object KMeans {
   def fillClusters(data: List[List[Double]], centers: List[List[Double]])
                   (implicit distance: (List[Double], List[Double]) => Double = euclidean)
   : List[List[List[Double]]] = {
-    val clusters: List[List[List[Double]]] = centers.indices.map(_ => List()).toList
+    var clusters: List[List[List[Double]]] = centers.indices.map(_ => List()).toList
 
-    data.map(point => {
+    data.foreach(point => {
       val distances = centers
         .indices
         .map(i => distance(point, centers(i)))
@@ -27,9 +37,15 @@ object KMeans {
 
       val nearestCenter = distances
         .indexOf(distances.min)
+      // ====+++++++=====
+      clusters =
+      clusters
+        .slice(0, nearestCenter) ::: clusters(nearestCenter)
+        .::(point) :: clusters
+        .slice(nearestCenter + 1, clusters.length)
 
-      point :: clusters(nearestCenter)
     })
+    clusters
   }
 
   def KMeans(data: List[List[Double]]
@@ -47,12 +63,6 @@ object KMeans {
       else {
         val clusters = fillClusters(data, centersCurr)
         val centersNew = clusters.map(updateCenter)
-
-        println(clusters.size)
-        println(centersCurr)
-        println("___________")
-        println(centersNew)
-        println()
 
         loop(centersNew
           , centersCurr.zip(centersNew)

@@ -19,16 +19,16 @@ object clustering {
     val clusters = KMeans(data, 2)
 
     println(clusters.size)
-//    clusters.foreach(it => println(it.size))
+    clusters.foreach(it => println(it.size))
 
     //Визуализация данных
-    val scatter = drawScatterToByteArray(data
-      , "X"
-      , "Y"
-      , "Clustering data (2 clusters, 2 dimensions)"
-      , "Some data")
-    val filename = "data/output/pic.png"
-    saveScatterPlot(scatter, filename)
+//    val scatter = drawScatterToByteArray(data
+//      , "X"
+//      , "Y"
+//      , "Clustering data (2 clusters, 2 dimensions)"
+//      , "Some data")
+//    val filename = "data/output/pic.png"
+//    saveScatterPlot(scatter, filename)
   }
 
 }
