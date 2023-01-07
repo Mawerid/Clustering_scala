@@ -1,4 +1,4 @@
-import functions.distance._
+import functions.Distance._
 import functions.randomCenters._
 
 import scala.util.Random
