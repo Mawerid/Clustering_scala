@@ -5,6 +5,7 @@ import functions.RandomCenters._
 import functions.UpdateCenters._
 import java.util.concurrent.{ExecutorService, Executors}
 import scala.annotation.tailrec
+
 object SequentialJoins {
 
   def findMin(distances: List[List[Double]]): (Int, Int) = {
@@ -13,15 +14,16 @@ object SequentialJoins {
     val indI: Int = distances.map(_.indexOf(min)).max
     val indJ: Int = distances(indI).indexOf(min)
 
-    (indI, indJ)
+    if (indI > indJ) (indJ, indI)
+    else (indI, indJ)
   }
 
 
   def sequentialJoins(data: List[List[Double]]
-             , clustersNum: Int
-             , eps: Double = 0.00001
-             , pool: ExecutorService
-             , threadsNum: Int = 1)
+                      , clustersNum: Int
+                      , eps: Double = 0.00001
+                      , pool: ExecutorService
+                      , threadsNum: Int = 1)
   : List[List[List[Double]]] = {
 
     var clustersStart: List[List[List[Double]]] = data.map(point => List(point))
@@ -32,7 +34,6 @@ object SequentialJoins {
         distancesVar = centers.map(point => euclidean(point, currCenter)) :: distancesVar
       }
     }
-
 
 
     @tailrec
