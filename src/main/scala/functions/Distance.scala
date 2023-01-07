@@ -1,12 +1,6 @@
 package functions
 
-import java.util.concurrent.Executors
-import scala.annotation.tailrec
-
-object distance extends App{
-
-  // Даниил, нам надоЮ чтобы это была библиотека, чтобы я вызвал функцию и все заработало
-  // А еще давай реализуем расчет расстояний несколькими способами (ссылка в телеге)
+object Distance extends App{
 
   /**
    * square of euclidean distance

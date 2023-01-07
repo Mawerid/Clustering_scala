@@ -1,4 +1,4 @@
-import functions.distance._
+import functions.Distance._
 
 object testingCode extends App{
 
