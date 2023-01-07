@@ -1,4 +1,7 @@
 import functions.distance._
+import functions.randomCenters._
+
+import scala.util.Random
 
 object testingCode extends App{
 
@@ -7,5 +10,8 @@ object testingCode extends App{
 
   println(euclidean(p1, p2))
   println(manhattan(p1, p2))
+
+  val cluster: List[List[Double]] = List(List(1D, 2D, 1D), List(2D, 6D, 1D), List(3D, 7D, 1D)) // example cluster
+  val numOfClusters = 2
 
 }

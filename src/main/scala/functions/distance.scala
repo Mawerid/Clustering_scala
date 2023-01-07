@@ -1,12 +1,6 @@
 package functions
 
-import java.util.concurrent.Executors
-import scala.annotation.tailrec
-
-object distance extends App{
-
-  // Даниил, нам надоЮ чтобы это была библиотека, чтобы я вызвал функцию и все заработало
-  // А еще давай реализуем расчет расстояний несколькими способами (ссылка в телеге)
+object distance {
 
   /**
    * square of euclidean distance
@@ -48,14 +42,13 @@ object distance extends App{
   def chebyshev(p1: List[Double], p2: List[Double]): Double =
     p1.zip(p2).map(it => Math.abs(it._1 - it._2)).max
 
-
   /**
    * powering distance
    *
    * @param p1 first point
    * @param p2 second point
-   * @param r degree of radical
-   * @param p degree of powering
+   * @param r  degree of radical
+   * @param p  degree of powering
    * @return distance between them
    */
   def powering(p1: List[Double], p2: List[Double], r: Double, p: Double): Double =
