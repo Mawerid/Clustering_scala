@@ -5,7 +5,15 @@ import org.nspl.awtrenderer._
 
 object Visualisation {
 
-  // Вроде как теперь все работает
+  /**
+   *
+   * @param data
+   * @param xLabel
+   * @param yLabel
+   * @param title
+   * @param legend
+   * @return
+   */
   def drawScatterToByteArray(data: List[List[Double]], xLabel: String, yLabel: String, title: String, legend: String): Array[Byte] = {
 
     val df = data.map(lst => lst.head -> lst(1))
@@ -19,12 +27,9 @@ object Visualisation {
     )
 
     val builtPlot = plot.build
-//    implicit val renderer: Renderer[Elems2[XYPlotArea, Legend], JavaRC] = {
-//      Renderer(builtPlot, new JavaRC())
-//    }
 
     pngToByteArray(
       builtPlot,
-      width = 2000)//(renderer)
+      width = 2000)
   }
 }
