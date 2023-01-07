@@ -2,28 +2,38 @@ package algorithm
 
 import functions.Distance._
 import functions.randomCenters._
-
 import java.util.concurrent.{ExecutorService, Executors}
 import scala.annotation.tailrec
 
-import scala.annotation.tailrec
-import java.net.{Socket, ServerSocket}
-import java.util.concurrent.{Executors, ExecutorService}
-import java.util.Date
-
-
 object KMeans {
-//  def newCenter(cluster: List[List[Double]], idThread: Int): List[Double] = {
-//    @tailrec
-//    def loop()
-//  }
 
-  def meanCoor(cluster: List[List[Double]], dimention: Int): Double =
-    cluster.map(point => point(dimention)).sum / cluster.size
+  /**
+   * Find mean value of dimension in cluster
+   *
+   * @param cluster cluster data
+   * @param dimension dimension to find mean
+   * @return mean value
+   */
+  def meanCoor(cluster: List[List[Double]], dimension: Int): Double =
+    cluster.map(point => point(dimension)).sum / cluster.size
 
+  /**
+   * Find new center of cluster
+   *
+   * @param cluster cluster of points
+   * @return new center(mean)
+   */
   def updateCenter(cluster: List[List[Double]]): List[Double] =
     cluster.head.indices.map(i => meanCoor(cluster, i)).toList
 
+  /**
+   * Filling each cluster
+   *
+   * @param data data to fill in clusters
+   * @param centers centers of each cluster
+   * @param distance function of distance between two points
+   * @return list with each cluster filled with points
+   */
   def fillClusters(data: List[List[Double]], centers: List[List[Double]])
                   (implicit distance: (List[Double], List[Double]) => Double = euclidean)
   : List[List[List[Double]]] = {
@@ -37,7 +47,8 @@ object KMeans {
 
       val nearestCenter = distances
         .indexOf(distances.min)
-      // ====+++++++=====
+
+
       clusters =
       clusters
         .slice(0, nearestCenter) ::: clusters(nearestCenter)
@@ -48,6 +59,14 @@ object KMeans {
     clusters
   }
 
+  /**
+   * Function of clustering by K-Means method
+   *
+   * @param data data to cluster
+   * @param clustersNum number of clusters to fill
+   * @param eps accuracy of clustering
+   * @return filled list with each cluster
+   */
   def KMeans(data: List[List[Double]]
              , clustersNum: Int
              , eps: Double = 0.00001)
