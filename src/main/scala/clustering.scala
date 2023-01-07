@@ -27,8 +27,6 @@ object clustering {
       ,"Some data")
     val filename = "data/output/pic.png"
     saveScatterPlot(scatter, filename)
-
-
   }
 
 }

@@ -6,19 +6,19 @@ import java.io.File
 object Input {
 
   /**
-   *
-   * @param path
-   * @return
+   * Read CSV file with headers
+   * @param path path to file
+   * @return List of Map(header -> value)
    */
-  def readFullReadersCSV(path: String): List[Map[String, Double]] = {
+  def readFullHeadersCSV(path: String): List[Map[String, Double]] = {
     val reader = CSVReader.open(new File(path))
     reader.allWithHeaders().map(_.map(it => it._1 -> it._2.toDouble))
   }
 
   /**
-   *
-   * @param path
-   * @return
+   * Read CSV file without headers
+   * @param path path to file
+   * @return List of points
    */
   def readFullCSV(path: String): List[List[Double]] = {
     val reader = CSVReader.open(new File(path))
@@ -26,9 +26,9 @@ object Input {
   }
 
   /**
-   *
-   * @param path
-   * @return
+   * Read CSV file without headers
+   * @param path path to file
+   * @return Iterator in each data point
    */
   def iteratorLineCSV(path: String): Iterator[Seq[Double]] = {
     val reader = CSVReader.open(new File(path))

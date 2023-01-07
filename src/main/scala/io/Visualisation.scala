@@ -6,13 +6,13 @@ import org.nspl.awtrenderer._
 object Visualisation {
 
   /**
-   *
-   * @param data
-   * @param xLabel
-   * @param yLabel
-   * @param title
-   * @param legend
-   * @return
+   * generate plot from 2 dimension data
+   * @param data data
+   * @param xLabel label of x axes
+   * @param yLabel label of y axes
+   * @param title main title of plot
+   * @param legend legend of plot
+   * @return png plot as ByteArray
    */
   def drawScatterToByteArray(data: List[List[Double]], xLabel: String, yLabel: String, title: String, legend: String): Array[Byte] = {
 
