@@ -28,30 +28,16 @@ object clustering {
 
     val clusters = kMeans(data, clusterNum, 0.00001, pool, countThread)
 
-    println(clusters.size)
-    clusters.foreach(it => println(it.size))
-
     pool.shutdown()
 
     // Визуализация данных
-    val names: Seq[String] = data.head.indices.map(i => s"coordinate $i") :+ "class"
-    val transData = data.map(_.toArray).toArray
+    println(clusters.size)
+    clusters.foreach(it => println(it.size))
 
-    val tmp = data
-      .map(point => (0 until clusterNum)
-        .map(i => if (clusters(i)
-          .contains(point)) i.toDouble + 1d))
-      .map(it => it
-        .find(_.toString != "()")
-        .get)
-      .map(_.toString.toDouble).toArray
-
-    val df = DataFrame.of(transData.zip(tmp).map(it => it._1 :+ it._2), names: _*)
+    val df = prepareToPlot(data, clusters)
     println(df)
 
-    val plotBefore = plot(df, "coordinate 0", "coordinate 1", "coordinate 2","class", '*')
-    plotBefore.setAxisLabels("X", "Y", "Z")
-    show(plotBefore)
+    draw3DPlot(df)
   }
 
 }

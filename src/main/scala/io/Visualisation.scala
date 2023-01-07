@@ -25,10 +25,34 @@ object Visualisation extends App {
     DataFrame.of(transData.zip(tmp).map(it => it._1 :+ it._2), names: _*)
   }
 
-  def draw2DPlot(df: DataFrame): Unit = {
-    val plotBefore = plot(df, "coordinate 0", "coordinate 1", "coordinate 2", "class", '*')
-    plotBefore.setAxisLabels("X", "Y", "Z")
-    show(plotBefore)
+  def draw2DPlot(df: DataFrame
+                 , coor1: String = "coordinate 0"
+                 , coor2: String = "coordinate 1"
+                 , xLabel: String = "X"
+                 , yLabel: String = "Y"
+                 , title: String = "Title")
+  : Unit = {
+    val plotB = plot(df, coor1, coor2, "class", '*')
+    plotB.setAxisLabels(xLabel, yLabel)
+    plotB.setLegendVisible(true)
+    plotB.setTitle(title)
+    show(plotB)
+  }
+
+  def draw3DPlot(df: DataFrame
+                 , coor1: String = "coordinate 0"
+                 , coor2: String = "coordinate 1"
+                 , coor3: String = "coordinate 2"
+                 , xLabel: String = "X"
+                 , yLabel: String = "Y"
+                 , zLabel: String = "Z"
+                 , title: String = "Title")
+  : Unit = {
+    val plotB = plot(df, coor1, coor2, coor3, "class", '*')
+    plotB.setAxisLabels(xLabel, yLabel, zLabel)
+    plotB.setLegendVisible(true)
+    plotB.setTitle(title)
+    show(plotB)
   }
 
 }
