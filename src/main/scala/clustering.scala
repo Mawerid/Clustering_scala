@@ -5,7 +5,7 @@ import io.Output._
 import algorithm.KMeans._
 import algorithm.SequentialJoins._
 
-import java.util.concurrent.{ExecutorService, Executors}
+import java.util.concurrent.{Executors}
 
 object clustering {
 
@@ -15,15 +15,15 @@ object clustering {
     val countThread: Int = java.lang.Runtime.getRuntime.availableProcessors / 2
 
     // Чтение данных
-    val path = "data/input/clusters_3_dim_3.csv"
+    val path = "data/input/clusters_2_dim_2.csv"
     val data = readFullCSV(path)
-    val clusterNum = 3
+    val clusterNum = 2
 
     // Запуск расчетов
     val pool = Executors.newFixedThreadPool(countThread)
 
-    val clusters = kMeans(data, clusterNum, 0.00001, pool, countThread)
-//    val clusters = sequentialJoins(data, clusterNum, pool)
+//    val clusters = kMeans(data, clusterNum, 0.00001, pool, countThread)
+    val clusters = sequentialJoins(data, clusterNum, pool)
 
     pool.shutdown()
 
@@ -34,7 +34,7 @@ object clustering {
     val df = prepareToPlot(data, clusters)
     println(df)
 
-    draw3DPlot(df)
+    draw2DPlot(df)
   }
 
 }
