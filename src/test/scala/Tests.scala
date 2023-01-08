@@ -46,9 +46,9 @@ object Tests extends App {
       val pool = Executors.newFixedThreadPool(i)
       print(s"Started calculations by $i threads. ")
       print("Method: Sequential Joins. ")
-      val time = (0 until 1).map(_ => {
+      val time = (0 until  1).map(_ => {
         val start = System.nanoTime
-        val clusters = kMeans(iter._1, iter._2, 0.00001, pool, i)
+        val clusters = sequentialJoins(iter._1, iter._2, pool)
         System.nanoTime - start
       }).toList
       pool.shutdown()
