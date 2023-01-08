@@ -10,7 +10,7 @@ import scala.io.StdIn.readLine
 
 import java.util.concurrent.Executors
 
-object clustering {
+object Clustering {
 
   def main(args: Array[String]): Unit = {
 
