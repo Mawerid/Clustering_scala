@@ -9,7 +9,7 @@ import scala.annotation.tailrec
 object SequentialJoins {
 
   def findMin(distances: List[List[Double]]): (Int, Int) = {
-    val min: Double = distances.map(_.min).min
+    val min: Double = distances.map(_.filterNot(_ == 0.0).min).filterNot(_ == 0.0).min
 
     val tmp: List[Int] = distances.map(_.indexOf(min))
     val indI: Int = tmp.max
@@ -18,7 +18,6 @@ object SequentialJoins {
     if (indI > indJ) (indJ, indI)
     else (indI, indJ)
   }
-
 
   def sequentialJoins(data: List[List[Double]]
                       , clustersNum: Int

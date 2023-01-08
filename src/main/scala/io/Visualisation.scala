@@ -9,6 +9,12 @@ import smile.plot.Render._
 
 object Visualisation extends App {
 
+  /**
+   *
+   * @param data
+   * @param clusters
+   * @return
+   */
   def prepareToPlot(data: List[List[Double]], clusters: List[List[List[Double]]])
   : DataFrame = {
     val names: Seq[String] = data
@@ -33,6 +39,15 @@ object Visualisation extends App {
         .map(it => it._1 :+ it._2), names: _*)
   }
 
+  /**
+   *
+   * @param df
+   * @param coor1
+   * @param coor2
+   * @param xLabel
+   * @param yLabel
+   * @param title
+   */
   def draw2DPlotRaw(df: DataFrame
                     , coor1: String = "coordinate 0"
                     , coor2: String = "coordinate 1"
@@ -47,6 +62,15 @@ object Visualisation extends App {
     show(plotB)
   }
 
+  /**
+   *
+   * @param df
+   * @param coor1
+   * @param coor2
+   * @param xLabel
+   * @param yLabel
+   * @param title
+   */
   def draw2DPlot(df: DataFrame
                  , coor1: String = "coordinate 0"
                  , coor2: String = "coordinate 1"
@@ -61,6 +85,18 @@ object Visualisation extends App {
     show(plotB)
   }
 
+  /**
+   *
+   *
+   * @param df Dataframe
+   * @param coor1
+   * @param coor2
+   * @param coor3
+   * @param xLabel
+   * @param yLabel
+   * @param zLabel
+   * @param title
+   */
   def draw3DPlot(df: DataFrame
                  , coor1: String = "coordinate 0"
                  , coor2: String = "coordinate 1"
@@ -76,5 +112,4 @@ object Visualisation extends App {
     plotB.setTitle(title)
     show(plotB)
   }
-
 }

@@ -34,7 +34,20 @@ object clustering {
     val df = prepareToPlot(data, clusters)
     println(df)
 
-    draw3DPlot(df)
+
+    data.head.size match {
+      case 1 => println("We cannot draw plot in 1 dimension only")
+      case 2 => draw2DPlot(df)
+      case 3 => draw3DPlot(df)
+      case _ => {
+
+      }
+    }
+
+    // Предсказание значений
+
+
+    // Сохранение данных
   }
 
 }

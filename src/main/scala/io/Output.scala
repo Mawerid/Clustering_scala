@@ -22,6 +22,23 @@ object Output {
   }
 
   /**
+   * Save clusters in some directory
+   *
+   * @param clusters        list of clusters with point
+   * @param pathToDirectory path to directory to save clusters
+   * @return files created or not
+   */
+  def saveClusters(clusters: List[List[List[Double]]], pathToDirectory: String): Boolean = {
+    clusters.indices.map(ind => {
+      val file = new File(pathToDirectory + s"/cluster_$ind.csv")
+      val writer = CSVWriter.open(file)
+      writer.writeAll(clusters(ind))
+      writer.close()
+      file.isFile
+    }).forall(_ == true)
+  }
+
+  /**
    * Save plot to png
    *
    * @param scatter plot (as ByteArray)
@@ -32,5 +49,6 @@ object Output {
     val output = Files.write(Paths.get(path), scatter)
     output.toFile.isFile
   }
+
 
 }

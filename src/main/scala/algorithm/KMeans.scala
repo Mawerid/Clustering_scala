@@ -61,7 +61,6 @@ object KMeans {
 
     val centersStart = randomChoice(data, clustersNum)
 
-    //val pool = Executors.newFixedThreadPool(threadsNum)
     var clustersVar: List[List[List[Double]]] = centersStart.indices.map(_ => List()).toList
     val r = data.length % threadsNum
     val n = data.length / threadsNum
@@ -91,7 +90,7 @@ object KMeans {
 
         Thread.sleep(100)
 
-        val clusters = clustersVar //fillClusters(data, centersCurr)
+        val clusters = clustersVar
         val centersNew = clusters.map(updateCenter)
 
         loop(centersNew
@@ -104,5 +103,28 @@ object KMeans {
     fillClusters(data, loop(centersStart, eps + 1d))
   }
 
-//  def
+  /**
+   * Prediction of clustering
+   *
+   * @param centers centers of clusters
+   * @param point point to predict
+   * @return number of predicted cluster
+   */
+  def predictKMeansCenters(centers: List[List[Double]], point: List[Double]): Int = {
+    val distances = centers.map(center => euclidean(center, point))
+    distances.indexOf(distances.min)
+  }
+
+  /**
+   * Prediction of clustering
+   *
+   * @param clusters clusters
+   * @param point point to predict
+   * @return number of predicted cluster
+   */
+   def predictKMeansClusters(clusters: List[List[List[Double]]], point: List[Double]): Int = {
+    val centers = clusters.map(updateCenter)
+    val distances = centers.map(center => euclidean(center, point))
+    distances.indexOf(distances.min)
+  }
 }
