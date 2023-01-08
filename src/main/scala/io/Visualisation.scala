@@ -9,8 +9,13 @@ import smile.plot.Render._
 
 object Visualisation extends App {
 
-  def prepareToPlot(data: List[List[Double]], clusters: List[List[List[Double]]]): DataFrame = {
-    val names: Seq[String] = data.head.indices.map(i => s"coordinate $i") :+ "class"
+  def prepareToPlot(data: List[List[Double]], clusters: List[List[List[Double]]])
+  : DataFrame = {
+    val names: Seq[String] = data
+      .head
+      .indices
+      .map(i => s"coordinate $i") :+ "class"
+
     val transData = data.map(_.toArray).toArray
 
     val tmp = data
@@ -22,7 +27,24 @@ object Visualisation extends App {
         .get)
       .map(_.toString.toDouble).toArray
 
-    DataFrame.of(transData.zip(tmp).map(it => it._1 :+ it._2), names: _*)
+    DataFrame
+      .of(transData
+        .zip(tmp)
+        .map(it => it._1 :+ it._2), names: _*)
+  }
+
+  def draw2DPlotRaw(df: DataFrame
+                    , coor1: String = "coordinate 0"
+                    , coor2: String = "coordinate 1"
+                    , xLabel: String = "X"
+                    , yLabel: String = "Y"
+                    , title: String = "Title")
+  : Unit = {
+    val plotB = plot(df, coor1, coor2, '*', RED)
+    plotB.setAxisLabels(xLabel, yLabel)
+    plotB.setLegendVisible(true)
+    plotB.setTitle(title)
+    show(plotB)
   }
 
   def draw2DPlot(df: DataFrame
