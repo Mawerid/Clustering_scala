@@ -112,29 +112,4 @@ object KMeans {
 
     fillClusters(data, loop(centersStart, eps + 1d)) // итоговые кластеры
   }
-
-  /**
-   * Prediction of clustering
-   *
-   * @param centers centers of clusters
-   * @param point point to predict
-   * @return number of predicted cluster
-   */
-  def predictKMeansCenters(centers: List[List[Double]], point: List[Double]): Int = {
-    val distances = centers.map(center => euclidean(center, point))
-    distances.indexOf(distances.min)
-  }
-
-  /**
-   * Prediction of clustering
-   *
-   * @param clusters clusters
-   * @param point point to predict
-   * @return number of predicted cluster
-   */
-   def predictKMeansClusters(clusters: List[List[List[Double]]], point: List[Double]): Int = {
-    val centers = clusters.map(updateCenter)
-    val distances = centers.map(center => euclidean(center, point))
-    distances.indexOf(distances.min)
-  }
 }
