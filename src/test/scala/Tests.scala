@@ -16,8 +16,10 @@ object Tests extends App {
   val clustersNum: List[Int] = List(2, 2, 3, 3)
 
   data.zip(clustersNum).map(iter => {
+    println()
     println("++++++++++++++++++++++++++++++++++++++++++")
-    println(s"Work with [ ${data.indexOf(iter._1) + 1} ] testing file")
+    println(s"Work with [ ${data.indexOf(iter._1) + 1} ] testing file with size ${iter._1.size}")
+    println("++++++++++++++++++++++++++++++++++++++++++")
     (1 to countThread).map(i => {
       val pool = Executors.newFixedThreadPool(i)
       print(s"Started calculations by $i threads. ")
@@ -34,8 +36,10 @@ object Tests extends App {
   })
 
   data.zip(clustersNum).map(iter => {
+    println()
     println("++++++++++++++++++++++++++++++++++++++++++")
-    println(s"Work with [ ${data.indexOf(iter._1) + 1} ] testing file")
+    println(s"Work with [ ${data.indexOf(iter._1) + 1} ] testing file with size ${iter._1.size}")
+    println("++++++++++++++++++++++++++++++++++++++++++")
     (1 to countThread).map(i => {
       val pool = Executors.newFixedThreadPool(i)
       print(s"Started calculations by $i threads. ")
