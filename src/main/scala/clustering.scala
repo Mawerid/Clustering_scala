@@ -36,7 +36,7 @@ object clustering {
         print("Please, enter the number of clusters: -> ")
         val clusterNum = readLine().toInt
         sequentialJoins(data, clusterNum, pool)
-      case "3" => affinityPropagation(data)
+//      case "3" => affinityPropagation(data, pool)
     }
 
     pool.shutdown()
