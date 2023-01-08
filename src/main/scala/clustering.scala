@@ -5,7 +5,7 @@ import io.Output._
 import algorithm.KMeans._
 import algorithm.SequentialJoins._
 
-import java.util.concurrent.{Executors}
+import java.util.concurrent.Executors
 
 object clustering {
 
@@ -22,8 +22,8 @@ object clustering {
     // Запуск расчетов
     val pool = Executors.newFixedThreadPool(countThread)
 
-//    val clusters = kMeans(data, clusterNum, 0.00001, pool, countThread)
-    val clusters = sequentialJoins(data, clusterNum, pool)
+    val clusters = kMeans(data, clusterNum, 0.00001, pool, countThread)
+//    val clusters = sequentialJoins(data, clusterNum, pool)
 
     pool.shutdown()
 
@@ -34,20 +34,19 @@ object clustering {
     val df = prepareToPlot(data, clusters)
     println(df)
 
-
     data.head.size match {
       case 1 => println("We cannot draw plot in 1 dimension only")
       case 2 => draw2DPlot(df)
       case 3 => draw3DPlot(df)
-      case _ => {
-
-      }
+      case _ => choosePlotting(df)
     }
 
     // Предсказание значений
 
 
     // Сохранение данных
+
+
   }
 
 }

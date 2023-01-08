@@ -10,10 +10,11 @@ import smile.plot.Render._
 object Visualisation extends App {
 
   /**
+   * Make DataFrame from our data
    *
-   * @param data
-   * @param clusters
-   * @return
+   * @param data     raw data
+   * @param clusters clusters
+   * @return DataFrame with all categorised data
    */
   def prepareToPlot(data: List[List[Double]], clusters: List[List[List[Double]]])
   : DataFrame = {
@@ -40,13 +41,14 @@ object Visualisation extends App {
   }
 
   /**
+   * Draw 2D plot without any categories
    *
-   * @param df
-   * @param coor1
-   * @param coor2
-   * @param xLabel
-   * @param yLabel
-   * @param title
+   * @param df     dataframe with data
+   * @param coor1  coordinate to show
+   * @param coor2  coordinate to show
+   * @param xLabel label of X axes
+   * @param yLabel label of Y axes
+   * @param title  title of plot
    */
   def draw2DPlotRaw(df: DataFrame
                     , coor1: String = "coordinate 0"
@@ -63,13 +65,14 @@ object Visualisation extends App {
   }
 
   /**
+   * Draw 2D plot with categories
    *
-   * @param df
-   * @param coor1
-   * @param coor2
-   * @param xLabel
-   * @param yLabel
-   * @param title
+   * @param df     dataframe with data
+   * @param coor1  coordinate to show
+   * @param coor2  coordinate to show
+   * @param xLabel label of X axes
+   * @param yLabel label of Y axes
+   * @param title  title of plot
    */
   def draw2DPlot(df: DataFrame
                  , coor1: String = "coordinate 0"
@@ -86,16 +89,16 @@ object Visualisation extends App {
   }
 
   /**
+   * Draw 3D plot with categories
    *
-   *
-   * @param df Dataframe
-   * @param coor1
-   * @param coor2
-   * @param coor3
-   * @param xLabel
-   * @param yLabel
-   * @param zLabel
-   * @param title
+   * @param df     dataframe with data
+   * @param coor1  coordinate to show
+   * @param coor2  coordinate to show
+   * @param coor3  coordinate to show
+   * @param xLabel label of X axes
+   * @param yLabel label of Y axes
+   * @param zLabel label of Z axes
+   * @param title  title of plot
    */
   def draw3DPlot(df: DataFrame
                  , coor1: String = "coordinate 0"
@@ -111,5 +114,9 @@ object Visualisation extends App {
     plotB.setLegendVisible(true)
     plotB.setTitle(title)
     show(plotB)
+  }
+
+  def choosePlotting(df: DataFrame): Unit = {
+    println("SORRY")
   }
 }

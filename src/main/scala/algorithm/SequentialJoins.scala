@@ -19,7 +19,7 @@ object SequentialJoins {
     val min: Double = distances.map(_.filterNot(_ == 0.0).min).filterNot(_ == 0.0).min
 
     val tmp: List[Int] = distances.map(_.indexOf(min)) // список с индексами минимальных элементов
-                                                        // (каждый индекс соответствует списку)
+    // (каждый индекс соответствует списку)
     val indI: Int = tmp.filter(_ != -1).min
     val indJ: Int = tmp.indexOf(indI)
 
@@ -47,9 +47,9 @@ object SequentialJoins {
 
     def task(centers: List[List[Double]], currCenter: List[Double]): Future[Unit] = {
       Future {
-          distancesVar =
-            centers.map(point => euclidean(point, currCenter)) :: distancesVar // добавление списка
-                                                                              // расстояний соответствующим потоком
+        distancesVar =
+          centers.map(point => euclidean(point, currCenter)) :: distancesVar // добавление списка
+        // расстояний соответствующим потоком
       }
     }
 
@@ -83,5 +83,30 @@ object SequentialJoins {
     }
 
     loop(clustersStart) // результат
+  }
+
+  /**
+   * Prediction of clustering
+   *
+   * @param centers centers of clusters
+   * @param point   point to predict
+   * @return number of predicted cluster
+   */
+  def predictSeqJoinsCenters(centers: List[List[Double]], point: List[Double]): Int = {
+    val distances = centers.map(center => euclidean(center, point))
+    distances.indexOf(distances.min)
+  }
+
+  /**
+   * Prediction of clustering
+   *
+   * @param clusters clusters
+   * @param point    point to predict
+   * @return number of predicted cluster
+   */
+  def predictSeqJoinsClusters(clusters: List[List[List[Double]]], point: List[Double]): Int = {
+    val centers = clusters.map(updateCenter)
+    val distances = centers.map(center => euclidean(center, point))
+    distances.indexOf(distances.min)
   }
 }
