@@ -4,6 +4,7 @@ import io.Output._
 
 import algorithm.KMeans._
 import algorithm.SequentialJoins._
+import algorithm.AffinityPropagation._
 
 import java.util.concurrent.Executors
 
@@ -22,14 +23,14 @@ object clustering {
     // Запуск расчетов
     val pool = Executors.newFixedThreadPool(countThread)
 
-    val clusters = kMeans(data, clusterNum, 0.00001, pool, countThread)
+//    val clusters = kMeans(data, clusterNum, 0.00001, pool, countThread)
 //    val clusters = sequentialJoins(data, clusterNum, pool)
-
+    val clusters = affinityPropagation(data)
     pool.shutdown()
 
     // Визуализация данных
-    println(clusters.size)
-    clusters.foreach(it => println(it.size))
+//    println(clusters.size)
+//    clusters.foreach(it => println(it.size))
 
     val df = prepareToPlot(data, clusters)
     println(df)
