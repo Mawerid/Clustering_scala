@@ -1,5 +1,0 @@
-package algorithm
-
-object SpectralClustering {
-
-}
