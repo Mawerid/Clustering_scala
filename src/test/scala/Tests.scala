@@ -24,11 +24,13 @@ object Tests extends App {
       val pool = Executors.newFixedThreadPool(i)
       print(s"Started calculations by $i threads. ")
       print("Method: K-Means. ")
-      val start = System.nanoTime
-      val clusters = kMeans(iter._1, iter._2, 0.00001, pool, i)
-      val end = System.nanoTime
+      val time = (0 until 20).map(_ => {
+        val start = System.nanoTime
+        val clusters = kMeans(iter._1, iter._2, 0.00001, pool, i)
+        System.nanoTime - start
+      }).toList
       pool.shutdown()
-      println(s"It takes ${(end - start) / 1e9d} seconds.")
+      println(s"It takes ${time.sum / 1e9d / 20} seconds.")
 //      println("++++++++++++++++++++++++++++++++++++++++++")
 //      summary(clusters)
       println("==========================================")
@@ -44,11 +46,13 @@ object Tests extends App {
       val pool = Executors.newFixedThreadPool(i)
       print(s"Started calculations by $i threads. ")
       print("Method: Sequential Joins. ")
-      val start = System.nanoTime
-      val clusters = sequentialJoins(iter._1, iter._2, pool)
-      val end = System.nanoTime
+      val time = (0 until 1).map(_ => {
+        val start = System.nanoTime
+        val clusters = kMeans(iter._1, iter._2, 0.00001, pool, i)
+        System.nanoTime - start
+      }).toList
       pool.shutdown()
-      println(s"It takes ${(end - start) / 1e9d} seconds.")
+      println(s"It takes ${time.sum / 1e9d / 1} seconds.")
 //      println("++++++++++++++++++++++++++++++++++++++++++")
 //      summary(clusters)
       println("==========================================")
