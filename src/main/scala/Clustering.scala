@@ -18,7 +18,7 @@ object Clustering {
     val method = tmp._2
 
     // Кол-во доступных ядер для распараллеливания
-    val countThread: Int = java.lang.Runtime.getRuntime.availableProcessors / 2
+    val countThread: Int = java.lang.Runtime.getRuntime.availableProcessors - 1
 
     // Чтение данных
     val path = tmp._1
@@ -36,7 +36,7 @@ object Clustering {
         print("Please, enter the number of clusters: -> ")
         val clusterNum = readLine().toInt
         sequentialJoins(data, clusterNum, pool)
-//      case "3" => affinityPropagation(data, pool)
+      case "3" => affinityPropagation(data, pool, countThread)
     }
 
     pool.shutdown()
