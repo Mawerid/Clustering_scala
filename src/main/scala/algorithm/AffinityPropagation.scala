@@ -104,12 +104,13 @@ object AffinityPropagation {
 
     var clusters: List[List[List[Double]]] = clustersVal
       .indices
-      .map(_ => List(List[Double]())).toList
+      .map(_ => List[List[Double]]()).toList
 
     data.zip(maximums).foreach(it => {
       val ind = clustersVal.indexOf(it._2)
       clusters = clusters.slice(0, ind) ::: (it._1 :: clusters(ind)) :: clusters.slice(ind + 1, clusters.length)
     })
+    clusters.foreach(println)
     clusters
   }
 
