@@ -2,6 +2,8 @@ import functions.Distance._
 import functions.RandomCenters._
 import algorithm.KMeans._
 import algorithm.SequentialJoins._
+import algorithm.AffinityPropagation._
+
 import io.Visualisation._
 
 import java.util.concurrent.{ExecutorService, Executors}
@@ -20,13 +22,20 @@ object testingCode extends App{
     , List(1.5, 4D), List(2, 4D), List(2.5, 4D), List(2, 4.05), List(1D, 3.5)
     , List(1D, 3), List(1.0, 2.5), List(0.9, 2.5))
 
-  val countThread = 4
+  val countThread = 8
   val clusterNum = 2
 
   val pool = Executors.newFixedThreadPool(countThread)
 
-  val clusters = kMeans(data, clusterNum, 0.00001, pool, countThread)
+  val data1 = List(List(3D, 4, 3, 2, 1)
+                ,  List(4D, 3, 5, 1, 1)
+                ,  List(3D, 5, 3, 3, 3)
+                ,  List(2D, 1, 3, 3, 2)
+                ,  List(1D, 1, 3, 2, 3))
+
+//  val clusters = kMeans(data, clusterNum, 0.00001, pool, countThread)
 //  val clusters = sequentialJoins(data, clusterNum, pool)
+  val clusters = affinityPropagation(data, pool, countThread, 1000000)
 
   pool.shutdown()
 
